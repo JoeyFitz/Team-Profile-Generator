@@ -1,24 +1,60 @@
 const inquirer = require ('inquirer');
 const fs = require('fs');
+const Intern = require('./lib/Intern');
+const Engineer = require('./lib/Engineer');
+const Manager = require('./lib/Manager');
+
+const commonQuestions = [
+    {
+        type: 'input',
+        message: "What is the team member's name?",
+        name: 'name',
+    },
+    {
+        type: 'input',
+        message: "What is the team member's ID?", 
+        name: 'ID',
+    },
+    {
+        type: 'input',
+        message: "What is the team member's email address?",
+        name: 'email',
+    },
+    {
+        type: 'checkbox',
+        message: "What is the team member's role?",
+        name: 'role',
+        choices: ['Manager', 'Engineer', 'Intern'],
+    },
+];
+
+const internQuestion = 
+    {
+        type: 'input',
+        message: "Which school does this team member attend?",
+        name: 'school',
+    };
+
+const engineerQuestion =
+    {
+        type: 'input',
+        message: "What is this team member's GitHub name?",
+        name: 'GitHub',
+    };
+
+const managerQuestion =
+    {
+        type: 'input',
+        message: "What is this team member's office number?",
+        name: 'number',
+    };
 
 const promptUser = () => {
-    return inquirer.prompt([
-        {
-            type: 'input',
-            message: "What is the team member's name?",
-            name: 'name',
-        },
-        {
-            type: 'input',
-            message: "What is the team member's ID?", 
-            name: 'ID',
-        },
-        {
-            type: 'input',
-            message: "What is the team member's email address?",
-            name: 'email',
-        }
-    ])
+    inquirer
+        .prompt(commonQuestions);
+        .then((response) => {
+
+        })
 }
     const generateHTML = (answers) =>
 `<!DOCTYPE html>

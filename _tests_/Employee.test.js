@@ -1,58 +1,15 @@
-const { isTypedArray } = require('util/types');
 const Employee = require('../lib/Employee');
 
-
-describe("Employee", () => {
-    describe("getName", () => {
-        it("should take in a string and output a string", () => {
-            const Joe = new Employee('Joseph', 5, 'joe@name.com');
-            const firstName = 'Joseph';
-            const result = getName(Joe);
-            expect(result).toEqual(firstName);
-        })
+describe('Employee class', () => {
+    it("Should have a name passed in that can be pulled out", () => {
+        expect(new Employee('joe', 5, 'joe@name.com').getName()).toBe('joe');
+    });
+    it("Should have an employee ID passed in that can be pulled out", () => {
+        expect(new Employee('joe', 5, 'joe@name.com').getID()).toBe('5');
+    });
+    it("Should have an email address passed in that can be pulled out", () => {
+        expect(new Employee('joe', 5, 'joe@name.com').getEmail()).toBe('joe@name.com');
     })
 })
 
-// const Algo = require("../algo");
-
-// describe("Algo", () => {
-//   describe("reverse", () => {
-//     it("should reverse a given string", () => {
-//       const str = "Hello World!";
-//       const reversed = "!dlroW olleH";
-
-//       const result = new Algo().reverse(str);
-
-//       expect(result).toEqual(reversed);
-//     });
-//   });
-
-//   describe("isPalindrome", () => {
-//     it("should return true if a string is a palindrome", () => {
-//       const str = "racecar";
-
-//       const result = new Algo().isPalindrome(str);
-
-//       expect(result).toEqual(true);
-//     });
-
-//     it("should return false if a string is not a palindrome", () => {
-//       const str = "neon";
-
-//       const result = new Algo().isPalindrome(str);
-
-//       expect(result).toEqual(false);
-//     });
-//   });
-
-//   describe("capitalize", () => {
-//     it("should take a string and return a new string with the first letter of each word capitalized", () => {
-//       const str = "capitalize every first word of the string.";
-//       const capitalized = "Capitalize Every First Word Of The String.";
-
-//       const result = new Algo().capitalize(str);
-
-//       expect(result).toEqual(capitalized);
-//     });
-//   });
-// });
+  
