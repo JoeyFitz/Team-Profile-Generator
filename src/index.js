@@ -1,8 +1,8 @@
 const inquirer = require ('inquirer');
 const fs = require('fs');
-const Intern = require('./lib/Intern');
-const Engineer = require('./lib/Engineer');
-const Manager = require('./lib/Manager');
+const Intern = require('../lib/Intern');
+const Engineer = require('../lib/Engineer');
+const Manager = require('../lib/Manager');
 
 const team = [];
 
@@ -92,6 +92,7 @@ const initialPrompt = () => {
             console.log(teammate);
             team.push(teammate);
             beginningHTML();
+            additionalHTML(teammate);
             continuePrompt();
         })
     }
@@ -121,7 +122,7 @@ const engineerPrompt = () => {
             console.log(teammate);
             team.push(teammate);
             additionalHTML(teammate);
-            continueQuestion();
+            continuePrompt();
         })
 }
 
@@ -133,7 +134,7 @@ const internPrompt = () => {
             console.log(teammate);
             team.push(teammate);
             additionalHTML(teammate);
-            continueQuestion();
+            continuePrompt();
         })
 }
 
@@ -154,7 +155,7 @@ const beginningHTML = () => {
         </nav>
         <div class="container">
             <div class="row">`;
-    fs.writeFile('./dist/index.html', html, (err) => err ? console.log(err): console.log('Success!')) 
+    fs.writeFile('../dist/index.html', html, (err) => err ? console.log(err): console.log('Success!')) 
 }
 
 const additionalHTML = (teammate) => {
@@ -167,16 +168,17 @@ const additionalHTML = (teammate) => {
         if(role === 'Engineer') {
             const github = teammate.getGithub();
             newHTML = 
-            `<div class="col-6">
-                <div class="card mx-auto mb-3" style="width: 18rem">
-                    <h5 class="card-header">${name}<br /><br />Engineer</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">ID: ${id}</li>
-                        <li class="list-group-item">Email Address: ${email}</li>
-                        <li class="list-group-item">GitHub: ${gitHub}</li>
-                    </ul>
-                </div>
-            </div>`;
+            `
+                <div class="col-6">
+                    <div class="card mx-auto mb-3" style="width: 18rem">
+                        <h5 class="card-header">${name}<br /><br />Engineer</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">ID: ${id}</li>
+                            <li class="list-group-item">Email Address: <a href="mailto:${email}">${email}</a> </li>
+                            <li class="list-group-item">GitHub: <a href= "https://github.com/${github}">${github}</a> </li>
+                        </ul>
+                    </div>
+                </div>`;
         }
         else if (role === 'Intern') {
             const school = teammate.getSchool();
@@ -186,7 +188,7 @@ const additionalHTML = (teammate) => {
                     <h5 class="card-header">${name}<br /><br />Intern</h5>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID: ${id}</li>
-                        <li class="list-group-item">Email Address: ${email}</li>
+                        <li class="list-group-item">Email Address: <a href="mailto:${email}">${email}</a> </li>
                         <li class="list-group-item">School: ${school}</li>
                     </ul>
                 </div>
@@ -200,13 +202,13 @@ const additionalHTML = (teammate) => {
                     <h5 class="card-header">${name}<br /><br />Manager</h5>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID: ${id}</li>
-                        <li class="list-group-item">Email Address: ${email}</li>
+                        <li class="list-group-item">Email Address: <a href="mailto:${email}">${email}</a> </li>
                         <li class="list-group-item">Office Phone: ${officeNumber}</li>
                     </ul>
                 </div>
             </div>`
         }
-        fs.appendFile('./dist/index.html', newHTML, (err) => {
+        fs.appendFile('../dist/index.html', newHTML, (err) => {
             if (err) {
                 return reject(err);
             };
@@ -221,7 +223,7 @@ const endingHTML = () => {
         </div>
     </body>
     </html>`;
-    fs.appendFile('./dist/index.html', html, (err) => err ? console.log(err): console.log('Success!'))
+    fs.appendFile('../dist/index.html', html, (err) => err ? console.log(err): console.log('Success!'))
 }
   
 const init = () => {
